@@ -1,0 +1,21 @@
+name: "Setup Node Project"
+description: "Setup Node Project"
+inputs:
+  node-version:
+    description: "node-version"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout current branch
+      uses: actions/checkout@v2
+
+    - name: Setup Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: 'yarn'
+
+    - name: Install Dependencies
+      run: yarn install
+      shell: bash
